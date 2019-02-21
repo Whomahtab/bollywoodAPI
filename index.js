@@ -3,6 +3,32 @@ const PORT = 3100;
 const fs = require("fs");
 const url = require("url");
 const app = express();
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.post("/name", (req, res) => {
+  fs.readFile("./bollywood.json", "utf8", (error, bollywoodData) => {
+    if (error) {
+      console.error(error);
+    }
+    let oldData = JSON.parse(bollywoodData);
+    let newActor = req.body;
+    console.log(newActor);
+    let newBollywoodData = JSON.stringify({
+      ...oldData,
+      ...newActor
+    });
+
+    fs.writeFile("./bollywood.json", newBollywoodData, error => {
+      if (error) {
+        console.error(error);
+      }
+    });
+    res.json({ message: "You have added a new actor!" });
+  });
+});
 
 app.get("/", (req, res) => {});
 
