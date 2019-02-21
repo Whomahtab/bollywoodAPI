@@ -23,9 +23,9 @@ app.get("/name", (req, res) => {
 });
 
 app.get("/gender/:bollywoodGender", (req, res) => {
-    let { bollywoodGender } = req.params;
+  let { bollywoodGender } = req.params;
   console.log("gender", bollywoodGender);
-  res.json({
+  res.json({});
 });
 
 app.listen(PORT, () => {
