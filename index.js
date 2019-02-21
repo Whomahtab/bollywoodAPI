@@ -5,8 +5,19 @@ const url = require("url");
 const app = express();
 const bodyParser = require("body-parser");
 
+const showdown = require("showdown");
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 app.get("/age", (req, res) => {
   let ageQuery = req.query.age;
@@ -51,8 +62,17 @@ app.post("/name", (req, res) => {
   });
 });
 
-app.get("/", (req, res) => {});
-
+app.get("/", (req, res) => {
+  (converter = new showdown.Converter()),
+    fs.readFile("./README.md", "utf8", (error, readMe) => {
+      if (error) {
+        console.error(error);
+        return res.json({ error: error });
+      }
+      html = converter.makeHtml(readMe);
+      res.send(html);
+    });
+});
 app.get("/name", (req, res) => {
   let bollywoodName = req.query.name;
   console.log(bollywoodName);
