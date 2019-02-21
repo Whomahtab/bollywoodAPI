@@ -1,7 +1,6 @@
 const express = require("express");
 const PORT = 3100;
 const fs = require("fs");
-const url = require("url");
 const app = express();
 const bodyParser = require("body-parser");
 
@@ -47,7 +46,6 @@ app.post("/name", (req, res) => {
     }
     let oldData = JSON.parse(bollywoodData);
     let newActor = req.body;
-    console.log(newActor);
     let newBollywoodData = JSON.stringify({
       ...oldData,
       ...newActor
@@ -75,7 +73,6 @@ app.get("/", (req, res) => {
 });
 app.get("/name", (req, res) => {
   let bollywoodName = req.query.name;
-  console.log(bollywoodName);
   fs.readFile("./bollywood.json", "utf8", (error, bollywoodData) => {
     if (error) {
       console.error(error);
@@ -93,7 +90,6 @@ app.get("/name", (req, res) => {
 
 app.get("/gender/:bollywoodGender", (req, res) => {
   let { bollywoodGender } = req.params;
-  console.log("gender", bollywoodGender);
   fs.readFile("./bollywood.json", "utf8", (error, bollywoodData) => {
     if (error) {
       console.error(error);
@@ -106,7 +102,6 @@ app.get("/gender/:bollywoodGender", (req, res) => {
     }
     let matches = {};
     for (let person in data) {
-      console.log(bollywoodGender);
       if (data[person].gender === bollywoodGender) {
         matches[person] = data[person];
       }
