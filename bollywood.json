@@ -1,0 +1,43 @@
+{
+  "Aamir Khan": {
+    "name": "Aamir Khan",
+    "age": "53",
+    "gender": "Male",
+    "image": "https://www.belfasttelegraph.co.uk/incoming/article37826815.ece/ALTERNATES/h342/aamir_khan%202.JPEG"
+  },
+
+  "Salman Khan": {
+    "name": "Salman Khan",
+    "age": "53",
+    "gender": "Male",
+    "image": "https://images.in.com/uploads/2019/02/salman-1.jpg?ver=0.2"
+  },
+
+  "Amitabh Bachchan": {
+    "name": "Amitabh Bachchan",
+    "age": "76",
+    "gender": "Male",
+    "image": "https://ichef.bbci.co.uk/images/ic/960x540/p05d1j3k.jpg"
+  },
+
+  "Aishwarya Rai": {
+    "name": "Aishwarya Rai",
+    "age": "45",
+    "gender": "Female",
+    "image": "https://cdn.dnaindia.com/sites/default/files/styles/full/public/2019/02/19/793189-aishwaryaraibachchan-upcomingprojects.jpg"
+  },
+
+  "Priyanka Chopra": {
+    "name": "Priyanka Chopra",
+    "age": "36",
+    "gender": "Female",
+    "image": "https://images.tmz.com/2019/02/15/0215-priyanka-chopra-nick-jonas-tmz-4.jpg"
+  },
+
+  "Deepika Padukone": {
+    "name": "Deepika Padukone",
+    "age": "33",
+    "gender": "Female",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/02/Deepika_at_the_press_conference_of_%E2%80%98Bajirao_Mastani%E2%80%99.jpg"
+  }
+}
