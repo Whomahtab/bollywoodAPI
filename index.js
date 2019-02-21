@@ -28,7 +28,7 @@ app.get("/age", (req, res) => {
     }
     let data = JSON.parse(bollywoodData);
     if (!ageQuery) {
-      res.json(data);
+      return res.json(data);
     }
     let matches = {};
     for (let person in data) {
@@ -36,7 +36,7 @@ app.get("/age", (req, res) => {
         matches[person] = data[person];
       }
     }
-    res.json(matches);
+    return res.json(matches);
   });
 });
 
@@ -55,10 +55,10 @@ app.post("/name", (req, res) => {
 
     fs.writeFile("./bollywood.json", newBollywoodData, error => {
       if (error) {
-        console.error(error);
+        return console.error(error);
       }
     });
-    res.json({ message: "You have added a new actor!" });
+    return res.json({ message: "You have added a new actor!" });
   });
 });
 
@@ -70,7 +70,7 @@ app.get("/", (req, res) => {
         return res.json({ error: error });
       }
       html = converter.makeHtml(readMe);
-      res.send(html);
+      return res.send(html);
     });
 });
 app.get("/name", (req, res) => {
@@ -87,7 +87,7 @@ app.get("/name", (req, res) => {
       res.json(data);
     }
     let name = data[bollywoodName];
-    res.json(name);
+    return res.json(name);
   });
 });
 
@@ -102,9 +102,8 @@ app.get("/gender/:bollywoodGender", (req, res) => {
     let data = JSON.parse(bollywoodData); // turn it into JS
     if (!bollywoodGender) {
       // if no query
-      res.json(data);
+      return res.json(data);
     }
-    console.log(data);
     let matches = {};
     for (let person in data) {
       console.log(bollywoodGender);
@@ -112,7 +111,7 @@ app.get("/gender/:bollywoodGender", (req, res) => {
         matches[person] = data[person];
       }
     }
-    res.json(matches);
+    return res.json(matches);
   });
 });
 
