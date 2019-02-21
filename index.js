@@ -8,6 +8,23 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.get("/age", (req, res) => {
+  let query = req.query;
+  console.log({ query });
+  let ageQuery = req.query.age;
+  fs.readFile("./bollywood.json", "utf8", (error, bollywoodData) => {
+    if (error) {
+      console.error(error);
+    }
+    let data = JSON.parse(bollywoodData);
+    if (!ageQuery) {
+      res.json(data);
+    }
+    let age = data[ageQuery];
+    res.json({ age: age });
+  });
+});
+
 app.post("/name", (req, res) => {
   fs.readFile("./bollywood.json", "utf8", (error, bollywoodData) => {
     if (error) {
