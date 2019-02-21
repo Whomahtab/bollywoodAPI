@@ -6,14 +6,15 @@
 
 This API allows you to search through a list of bollywood actors and actresses. You can search on:
 
-  - Name
-  - Age
-  - Gender
+- Name
+- Age
+- Gender
 
 # Parameters
-  Use Capital letters for pronouns and nouns
-  age and gender queries with multiple matches will return all matches
 
-  - /name?name=query - returns all names on file Also use POST to add a new Bollywood actor
-  - age?age=query - age will return all actors and actresses of this age
-  - /gender/:Male or Female - params
+Use Capital letters for pronouns and nouns.
+Age and gender queries with multiple matches will return ALL matches.
+
+- /name?name=query - returns all names on file Also use POST to add a new Bollywood actor
+- age?age=query - age will return all actors and actresses of this age
+- /gender/:Male or Female - params

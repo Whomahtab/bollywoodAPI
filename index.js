@@ -5,8 +5,19 @@ const url = require("url");
 const app = express();
 const bodyParser = require("body-parser");
 
+const showdown = require("showdown");
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 app.get("/age", (req, res) => {
   let ageQuery = req.query.age;
@@ -17,7 +28,7 @@ app.get("/age", (req, res) => {
     }
     let data = JSON.parse(bollywoodData);
     if (!ageQuery) {
-      res.json(data);
+      return res.json(data);
     }
     let matches = {};
     for (let person in data) {
@@ -25,7 +36,7 @@ app.get("/age", (req, res) => {
         matches[person] = data[person];
       }
     }
-    res.json(matches);
+    return res.json(matches);
   });
 });
 
@@ -44,15 +55,24 @@ app.post("/name", (req, res) => {
 
     fs.writeFile("./bollywood.json", newBollywoodData, error => {
       if (error) {
-        console.error(error);
+        return console.error(error);
       }
     });
-    res.json({ message: "You have added a new actor!" });
+    return res.json({ message: "You have added a new actor!" });
   });
 });
 
-app.get("/", (req, res) => {});
-
+app.get("/", (req, res) => {
+  (converter = new showdown.Converter()),
+    fs.readFile("./README.md", "utf8", (error, readMe) => {
+      if (error) {
+        console.error(error);
+        return res.json({ error: error });
+      }
+      html = converter.makeHtml(readMe);
+      return res.send(html);
+    });
+});
 app.get("/name", (req, res) => {
   let bollywoodName = req.query.name;
   console.log(bollywoodName);
@@ -67,7 +87,7 @@ app.get("/name", (req, res) => {
       res.json(data);
     }
     let name = data[bollywoodName];
-    res.json(name);
+    return res.json(name);
   });
 });
 
@@ -82,9 +102,8 @@ app.get("/gender/:bollywoodGender", (req, res) => {
     let data = JSON.parse(bollywoodData); // turn it into JS
     if (!bollywoodGender) {
       // if no query
-      res.json(data);
+      return res.json(data);
     }
-    console.log(data);
     let matches = {};
     for (let person in data) {
       console.log(bollywoodGender);
@@ -92,7 +111,7 @@ app.get("/gender/:bollywoodGender", (req, res) => {
         matches[person] = data[person];
       }
     }
-    res.json(matches);
+    return res.json(matches);
   });
 });
 
